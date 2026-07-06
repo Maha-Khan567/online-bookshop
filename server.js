@@ -24,8 +24,9 @@ mongoose.connect(uri)
   const app = express();
   app.use(express.json());
   app.use('/', require('./routes/authRoutes'));
+   app.use('/', require('./routes/productRoutes'));
   const PORT = process.env.PORT || 3000;
- 
+
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
