@@ -1,7 +1,7 @@
-
+const Product = require('../models/product');
 async function addProduct(req, res)
 {
-try{
+try{ 
     const {title, description, price, stock, image}=req.body;
     const product = await Product.findOne({ title: title})
       
@@ -18,14 +18,19 @@ try{
        return res.status(200).send("Product Added Successfuly!");
         }
     else{
-        product.stock=stock+ product.stock;
+        
+        product.stock += Number(stock);
         await product.save();
         return res.status(200).send("Product Added Successfully!");
     }
 }
 catch (error) {
+    console.log(error);
         res.status(500).send("Internal Server Error");
+      
+     
     }
+    
 
 
 }

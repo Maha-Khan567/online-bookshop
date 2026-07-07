@@ -23,8 +23,9 @@ mongoose.connect(uri)
 
   const app = express();
   app.use(express.json());
-  app.use('/', require('./routes/authRoutes'));
-   app.use('/', require('./routes/productRoutes'));
+  app.use('/', require('./Routes/authRoutes'));
+   app.use('/', require('./Routes/productRoutes'));
+   app.use('/', require('./Routes/cartRoutes'));
   const PORT = process.env.PORT || 3000;
 
   app.listen(PORT, () => {
