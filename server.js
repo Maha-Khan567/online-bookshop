@@ -24,8 +24,10 @@ mongoose.connect(uri)
   const app = express();
   app.use(express.json());
   app.use('/', require('./Routes/authRoutes'));
-   app.use('/', require('./Routes/productRoutes'));
-   app.use('/', require('./Routes/cartRoutes'));
+  app.use('/', require('./Routes/productRoutes'));
+  app.use('/', require('./Routes/cartRoutes'));
+  app.use('/', require('./Routes/orderRoutes'));
+  app.use('/uploads', express.static('uploads'));
   const PORT = process.env.PORT || 3000;
 
   app.listen(PORT, () => {

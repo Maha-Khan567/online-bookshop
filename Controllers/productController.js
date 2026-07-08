@@ -2,7 +2,8 @@ const Product = require('../models/product');
 async function addProduct(req, res)
 {
 try{ 
-    const {title, description, price, stock, image}=req.body;
+    const {title, description, price, stock}=req.body;
+    const image = req.file ? req.file.path : "";
     const product = await Product.findOne({ title: title})
       
     if(!product)
