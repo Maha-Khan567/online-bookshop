@@ -7,3 +7,4 @@ else{
     return res.status(403).send("Access forbidden");
 }
 }
+module.exports = isAdmin;

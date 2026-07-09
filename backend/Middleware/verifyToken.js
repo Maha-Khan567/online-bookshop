@@ -17,3 +17,4 @@ function verifyToken(req, res, next) {
        return res.status(401).send("Invalid or expired token");
     }
 }
+module.exports = verifyToken;
