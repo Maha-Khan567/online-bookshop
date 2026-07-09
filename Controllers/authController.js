@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const Customer = require('../models/customer');
 const Admin = require('../models/admin');
@@ -38,7 +39,26 @@ const isMatch = await bcrypt.compare(password, customer.password);
 
     if(!isMatch){
  return res.status(401).send("Incorrect Password!");}
- return res.status(200).send("Login Successful!");
+ const payload=
+    {
+        id:customer._id ,
+    role: "customer",
+    };
+    const JWT_SECRET = process.env.JWT_SECRET ;
+    const options={
+        expiresIn: '5h', 
+    };
+
+ 
+ try {
+    const token = jwt.sign(payload, JWT_SECRET, options);
+    return res.status(200).json({
+    message: "Login Successful!",
+    token: token
+});
+} catch (error) {
+    console.error("Error signing token:", error.message);
+}
     }
     catch (error) {
         res.status(500).send("Internal Server Error");
