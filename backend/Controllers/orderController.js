@@ -39,7 +39,7 @@ async function getCustomerOrders(req,res)
 {try{
     const { customerId } = req.params;
 
-const orders = await Order.find({ customerId });
+const orders = await Order.find({ customerId }).populate("items.productId");
 
 if (orders.length === 0) {
     return res.status(404).send("No orders found!");
@@ -56,7 +56,7 @@ catch (error) {
 async function getAllOrders(req,res)
 {
 try{
-    const orders = await Order.find({});
+    const orders = await Order.find({}).populate("customerId").populate("items.productId");
     if (orders.length === 0) {
     return res.status(404).send("No orders found!");
 }
@@ -72,24 +72,38 @@ async function updateOrderStatus(req,res)
 try{
      const {status}=req.body;
       const { orderId } = req.params;
+      const order = await Order.findById(orderId);
+      if (!order) {
+    return res.status(404).send("Order not found!");
+}
       const validStatus = ["Pending", "Shipped", "Delivered", "Cancelled"];
       if (!validStatus.includes(status)) {
     return res.status(400).send("Invalid order status!");
 }
-    const updatedStatus=await  Order.findByIdAndUpdate(orderId  ,
-    {
-        status
-    },
-    { new: true }
-    );
-    if (updatedStatus)
-    {
-        return res.status(200).send("Order Status Updated Successfully!");
-    }
-    else{
-        return res.status(404).send("Order not found!");
-    }
     
+    if (
+    order.status !== "Delivered"
+    &&
+    status === "Delivered"
+    )
+    {
+        for (const item of order.items)
+           {
+         const product = await Product.findById(item.productId);
+         if(product)
+            {
+         product.stock -= item.quantity;
+         await product.save();
+           }
+
+           }
+            
+    }
+   order.status = status;
+   await order.save();
+   return res.status(200).send("Order Status Updated Successfully!");
+
+   
 }
 catch (error) {
         res.status(500).send("Internal Server Error");

@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 
 
 const cors = require('cors');
+
 const bcrypt = require('bcrypt');
 const  dotenv= require('dotenv');
 const  jsonwebtoken= require('jsonwebtoken');
@@ -23,11 +24,17 @@ mongoose.connect(uri)
 
   const app = express();
   app.use(express.json());
+
+  app.use(cors({
+    origin: "http://localhost:5173"
+}));
+
   app.use('/', require('./Routes/authRoutes'));
   app.use('/', require('./Routes/productRoutes'));
   app.use('/', require('./Routes/cartRoutes'));
   app.use('/', require('./Routes/orderRoutes'));
   app.use('/uploads', express.static('uploads'));
+  
   const PORT = process.env.PORT || 3000;
 
   app.listen(PORT, () => {

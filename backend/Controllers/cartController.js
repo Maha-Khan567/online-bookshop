@@ -58,7 +58,7 @@ async function addToCart(req, res){
 
 async function getCart(req, res){
     try{const { customerId } = req.params;
-        const cart =await Cart.findOne({ customerId });
+        const cart =await Cart.findOne({ customerId }).populate("items.productId");
         if(cart)
      {
         return res.status(200).send(cart);
@@ -77,6 +77,7 @@ async function removeFromCart(req, res){
     try{
         const { customerId, productId } = req.params;
         const cart =await Cart.findOne({ customerId });
+        
         if(!cart)
         {
         return res.status(404).send("Cart not found!");
@@ -118,6 +119,7 @@ async function removeFromCart(req, res){
      
     }
     catch (error) {
+        
         res.status(500).send("Internal Server Error");
     }
 }

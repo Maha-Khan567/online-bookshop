@@ -1,4 +1,4 @@
-console.log("orderRoutes loaded");
+
 const express = require('express');
 const router = express.Router();
 

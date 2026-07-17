@@ -3,7 +3,7 @@ async function addProduct(req, res)
 {
 try{ 
     const {title, description, price, stock}=req.body;
-    const image = req.file ? req.file.path : "";
+    const image = req.file ? req.file.filename : "";
     const product = await Product.findOne({ title: title})
       
     if(!product)
@@ -47,20 +47,44 @@ catch (error) {
         res.status(500).send("Internal Server Error");
     }
 }
-
-async function updateProduct(req, res)
-{try{  const {title, description, price, stock, image}=req.body;
-    const itemId = req.params.id;
-    const updatedProduct=await  Product.findByIdAndUpdate(itemId   ,
+async function getProductById(req, res)
+{
+    try
     {
-        title,
-        description,
-        price,
-        stock,
-        image
-    },
+        const product = await Product.findById(req.params.id);
+
+        if (!product)
+        {
+            return res.status(404).send("Product not found!");
+        }
+
+        return res.status(200).json(product);
+    }
+    catch (error)
+    {
+        return res.status(500).send("Internal Server Error");
+    }
+}
+async function updateProduct(req, res)
+{try{  
+    const {title, description, price, stock}=req.body;
+    const productId = req.params.id;
+    const updatedData = {
+    title,
+    description,
+    price,
+    stock
+};
+
+if (req.file) {
+    updatedData.image = req.file.filename;
+}
+
+const updatedProduct = await Product.findByIdAndUpdate(
+    productId,
+    updatedData,
     { new: true }
-    );
+);
     if (updatedProduct)
     {
         return res.status(200).send("Product Updated Successfully!");
@@ -95,6 +119,7 @@ catch (error) {
 module.exports = {
     addProduct,
     getAllProducts,
+    getProductById,
     updateProduct,
     deleteProduct
 };
