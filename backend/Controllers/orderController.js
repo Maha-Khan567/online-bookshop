@@ -1,5 +1,6 @@
 const Cart=require('../models/cart');
 const Order = require('../models/order');
+const Product = require("../models/product");
 async function placeOrder(req,res)
 {try{
 const { customerId } = req.body;

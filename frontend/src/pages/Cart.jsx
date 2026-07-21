@@ -96,6 +96,7 @@ try {const customerId =localStorage.getItem("customerId");
     Place Order
 </button>
 <br></br>
+<br></br>
  <button onClick={() => clearCart()}>
     Clear Cart
 </button>

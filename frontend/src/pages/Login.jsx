@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-     const [loginType, setLoginType] = useState("customer");
+     
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const navigate= useNavigate();
@@ -12,13 +12,9 @@ function Login() {
         e.preventDefault();
 
         try {
-           const url =
-    loginType === "admin"
-        ? "http://localhost:3000/admin/login"
-        : "http://localhost:3000/customer/login";
-
+         
 const response = await axios.post(
-    url, {
+    "http://localhost:3000/login", {
                     username,
                     password
                 }
@@ -27,24 +23,25 @@ const response = await axios.post(
           localStorage.removeItem("customerId");
          localStorage.removeItem("role");
 
+            
             localStorage.setItem("token", response.data.token);
-            localStorage.setItem("role", loginType);
+localStorage.setItem("role", response.data.role);
 
-            if (loginType === "customer") {
-           localStorage.setItem("customerId", response.data.customerId);
-    
-             }
-            alert(response.data.message);
+if (response.data.role === "customer") {
+    localStorage.setItem("customerId", response.data.customerId);
+} alert(response.data.message);
+
+            
 
             setUsername("");
             setPassword("");
             
-            if (loginType === "admin") {
-              navigate("/adminProducts");
-                   }
-            else {
-              navigate("/");
-                }
+           
+                if (response.data.role === "admin") {
+    navigate("/adminProducts");
+} else {
+    navigate("/");
+}
         }
 
         catch (error) {
@@ -57,16 +54,10 @@ const response = await axios.post(
     return (
 
         <>
-            <h1>Login Here!</h1>
+          <h1>Already have an account?</h1>
+            <h1 >Login Here!</h1>
           
-           <select
-    value={loginType}
-    onChange={(e) => setLoginType(e.target.value)}
->
-    <option value="customer">Customer</option>
-    <option value="admin">Admin</option>
-</select>
-            <form onSubmit={handleLogin}>
+          <form onSubmit={handleLogin}>
                
                 <input
                     type="text"

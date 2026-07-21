@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import {useNavigate } from "react-router-dom";
 function Orders()
 {   const role = localStorage.getItem("role");
-
+const navigate = useNavigate();
 if (role !== "customer") {
     navigate("/login");
 }
@@ -31,6 +32,7 @@ useEffect(() => {
             <h2>Order# {index + 1}</h2>   
   
            {order.items.map((item) => (
+            
             <div key={item.productId._id}>
  <img
     src={`http://localhost:3000/uploads/${item.productId.image}`}

@@ -33,8 +33,9 @@ async function handleAddToCart(productId) {
    
     return(
     <>
-   <h1>Explore our collection of latest Books!</h1>
-         {books.map((book) => (
+   
+    <div className="books-container">
+          {books.map((book) => (
             <div key={book._id}>
                 <img
     src={`http://localhost:3000/uploads/${book.image}`}
@@ -57,6 +58,7 @@ async function handleAddToCart(productId) {
 </div>
 
 ))}
+ </div>  
  </>
      )
     

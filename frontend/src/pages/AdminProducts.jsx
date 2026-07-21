@@ -59,13 +59,17 @@ if (role !== "admin") {
      
 
 return(
+   
     <>
+     <br></br>
+      <br></br>
      <button onClick={() =>addProduct()
        
     }>
     Add Product
 </button>
     <h1>All Products!</h1>
+     <div className="books-container">
          {books.map((book) => (
             <div key={book._id}>
                 <img
@@ -84,6 +88,7 @@ return(
 <button onClick={() =>deleteProduct(book._id)}>
     Delete Product
 </button>
+<br></br><br></br>
 <button onClick={() => editProduct(book._id)}>
     Edit Product
 </button>
@@ -95,7 +100,7 @@ return(
      
    
     
-    
+    </div>
     </>
 )
 }

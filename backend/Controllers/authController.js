@@ -25,14 +25,13 @@ catch (error) {
         res.status(500).send("Internal Server Error");
     }
 }
-
-async function loginCustomer(req, res){
-    try{
-        
-const {username,password}=req.body;
-const customer = await Customer.findOne({ username: username })
-  
-if(!customer)
+async function login(req, res)
+{try{
+    const { username, password } = req.body;
+    const admin = await Admin.findOne({ username });
+    if(!admin)
+   { const customer = await Customer.findOne({ username });
+    if(!customer)
    { return res.status(404).send("User not found");
     }
 const isMatch = await bcrypt.compare(password, customer.password);
@@ -47,69 +46,49 @@ const isMatch = await bcrypt.compare(password, customer.password);
     const JWT_SECRET = process.env.JWT_SECRET ;
     const options={
         expiresIn: '5h', 
-    };
+                    };
 
- 
- try {
     const token = jwt.sign(payload, JWT_SECRET, options);
     return res.status(200).json({
     message: "Login Successful!",
     token: token,
+    role: "customer",
     customerId: customer._id
-});
-} catch (error) {
-    console.error("Error signing token:", error.message);
-}
-    }
-    catch (error) {
-        res.status(500).send("Internal Server Error");
-    }
-}
+                               });
+    
+   }
+    
+    const isMatch = await bcrypt.compare(password, admin.password);
 
-
-async function loginAdmin(req, res){
- try{
-        
-const {username,password}=req.body;
-const admin = await Admin.findOne({ username: username })
-console.log(admin);
-  
-if(!admin)
-   { return res.status(404).send("User not found");
-    }
-//const isMatch = await bcrypt.compare(password, admin.password);
-
-  //  if(!isMatch){
-// return res.status(401).send("Incorrect Password!");}
-    if(password!="1234"){
+    if(!isMatch){
  return res.status(401).send("Incorrect Password!");}
+   
 
  const payload = {
     id: admin._id,
     role: "admin"
-};
+                  };
 const JWT_SECRET = process.env.JWT_SECRET;
 
 const options = {
     expiresIn: "5h"
-};
+               };
 
 const token = jwt.sign(payload, JWT_SECRET, options);
 
 return res.status(200).json({
     message: "Login Successful!",
-    token
-});
-    }
-
-    catch (error) {
-           console.log(error);
+    token,
+    role: "admin"
+                           });
+}
+ catch (error) {
         res.status(500).send("Internal Server Error");
     }
+
 }
 
 module.exports = {
     registerCustomer,
-    loginCustomer,
-    loginAdmin
+    login
 };

@@ -15,37 +15,40 @@ function Navbar()
 
     return(
         <nav>
-        <Link to="/">Home</Link> |{" "} 
+           <div className="nav"  >
+        <Link className="button" to="/">Home</Link> 
         
         {role === "customer" && (
             <>
-        <Link to="/Books">books</Link> |{" "} 
-        <Link to="/cart">Cart</Link> |{" "} 
-        <Link to="/orders">Orders</Link> |{" "} 
+        <Link className="button" to="/Books">books</Link> 
+        <Link  className="button" to="/cart">Cart</Link> 
+        <Link  className="button" to="/orders">Orders</Link>
         </>
         )}
         
         {role==="admin"&&(
             <>
-        <Link to="/allOrders">AllOrders</Link> |{" "} 
-        <Link to="/addProduct">AddProduct</Link> |{" "} 
-        <Link to="/adminProducts">AdminProducts</Link> |{" "} 
-        <Link to="/editProduct">EditProduct</Link> |{" "}
+        <Link  className="button" to="/allOrders">AllOrders</Link>
+        <Link  className="button" to="/addProduct">AddProduct</Link>  
+        <Link  className="button" to="/adminProducts">AllProducts</Link> 
         
         </>
         )}
+        </div>
+         <div className="logout">
         { token&&   (
         <button onClick={handleLogout}>Logout</button>
         )}
+       </div>
         </nav>
         
           ) 
 else
     return(
         <nav>
-        <Link to="/">Home</Link> |{" "}
-        <Link to="/login">Login</Link> |{" "}
-        <Link to="/register">Register</Link>
+        <Link className="button"  to="/">Home</Link> 
+        <Link  className="button" to="/login">Login</Link>
+        <Link className="button" to="/register">Register</Link>
         </nav>
          )
 }

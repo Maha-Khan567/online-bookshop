@@ -38,6 +38,7 @@ function Register() {
     return (
 
         <>
+        <h1>Don't have an account?</h1>
             <h1>Register Here!</h1>
 
             <form onSubmit={handleRegister}>

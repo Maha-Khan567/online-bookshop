@@ -23,8 +23,8 @@ function App() {
       <Route path="/register" element={<Register />} />
       <Route path="/books" element={<Books />} />
       <Route path="/cart" element={<Cart />} />
-      <Route path="/orders" element={<Orders />} />
-      <Route path="/allOrders" element={<AllOrders />} />
+      <Route path="/orders" element={<Orders/>} />
+      <Route path="/allOrders" element={<AllOrders/>} />
       <Route path="/addProduct" element={< AddProduct/>} />
       <Route path="/adminProducts" element={< AdminProducts/>} />
       <Route path="/editProduct/:id" element={< EditProduct/>} />

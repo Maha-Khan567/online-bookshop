@@ -1,0 +1,25 @@
+.home {
+    background-image: url("/bck.webp");
+     width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    padding-top: 80px;
+     padding-left: 120px;
+}
+.browse-link {
+    cursor: pointer;
+    color: white;
+    font-size: 30px;
+}
+.home h1,
+.home p,
+.browse-link {
+    max-width: 500px;
+}
+

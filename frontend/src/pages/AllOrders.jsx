@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import {useNavigate } from "react-router-dom";
 function AllOrders()
 {   const role = localStorage.getItem("role");
-
+const navigate = useNavigate();
 if (role !== "admin") {
     navigate("/");
 }
