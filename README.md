@@ -1,16 +1,118 @@
-# React + Vite
+#  Online Book Store
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A full-stack Online Book Store web application built using the MERN stack. The application allows customers to browse books, add them to a shopping cart, place orders, and track their order status.
+Administrators can manage products, monitor customer orders, and update order statuses through a dedicated admin panel.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+#  Features
 
-## React Compiler
+## Customer Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Register a new account
+- Secure login
+- Browse available books
+- View product details
+- Add books to cart
+- Remove books from cart
+- Place orders
+- View previous orders
+- Logout securely
 
-## Expanding the Oxlint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Admin Features
+
+- Secure admin login
+- Add new books
+- Edit book details
+- Delete books
+- View all products
+- View all customer orders
+- Update order status
+
+---
+
+#  Tech Stack
+
+## Frontend
+
+- React.js
+- React Router DOM
+- Axios
+- HTML
+- CSS
+- JavaScript
+
+---
+
+## Backend
+
+- Node.js
+- Express.js
+- MongoDB Atlas
+- Mongoose
+
+---
+
+## Authentication & Security
+
+- JWT (JSON Web Token)
+- bcrypt
+
+---
+
+## File Upload
+
+- Multer
+
+---
+
+## API Testing
+
+- Thunder Client
+- Postman
+
+---
+
+## Version Control
+
+- Git
+- GitHub
+
+---
+
+#  Database Collections
+
+- Admin
+- Customer
+- Product
+- Cart
+- Order
+
+
+
+# Authentication
+
+The application uses:
+
+- JWT Authentication
+- Password hashing using bcrypt
+- Protected Routes
+- Role-based Authorization (Customer/Admin)
+
+
+# Pages
+
+- Home Page
+- Login
+- Register
+- Product Listing
+- Shopping Cart
+- Orders
+- Add Product
+- Edit Product
+- All Orders
+
+
+
